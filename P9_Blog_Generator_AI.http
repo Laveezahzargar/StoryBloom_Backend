@@ -1,0 +1,6 @@
+@P9_Blog_Generator_AI_Backend_HostAddress = http://localhost:5238
+
+GET {{P9_Blog_Generator_AI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
