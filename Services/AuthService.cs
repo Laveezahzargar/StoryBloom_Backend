@@ -1,12 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using P9_Blog_Generator_AI_Backend.Data;
 using P9_Blog_Generator_AI_Backend.DTOs.Auth;
 using P9_Blog_Generator_AI_Backend.Models;
 using P9_Blog_Generator_AI_Backend.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
+//using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
 
 namespace P9_Blog_Generator_AI_Backend.Services.Implementations;
 
@@ -23,11 +24,14 @@ public class AuthService : IAuthService
 
     public async Task<bool> RegisterAsync(RegisterDto dto)
     {
+        //Log.Information("User registration started for Email: {Email}", dto.Email);
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
         if (existingUser != null)
         {
+    //        Log.Warning("Registration failed. Email already exists: {Email}",
+    //dto.Email);
             return false;
         }
 
@@ -41,16 +45,23 @@ public class AuthService : IAuthService
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
+    //    Log.Information("User registered successfully. UserId: {UserId}, Email: {Email}",
+    //user.UserId, user.Email);
+
         return true;
     }
 
     public async Task<string?> LoginAsync(LoginDto dto)
     {
+        //Log.Information("Login attempt for Email: {Email}", dto.Email);
+
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
         if (user == null)
         {
+    //        Log.Warning("Login failed. Invalid credentials for Email: {Email}",
+    //dto.Email);
             return null;
         }
 
@@ -59,8 +70,13 @@ public class AuthService : IAuthService
 
         if (!isPasswordValid)
         {
+    //        Log.Warning("Login failed. Invalid credentials for Email: {Email}",
+    //dto.Email);
             return null;
         }
+
+    //    Log.Information("User logged in successfully. UserId: {UserId}",
+    //user.UserId);
 
         return GenerateJwtToken(user);
     }

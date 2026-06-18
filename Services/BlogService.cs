@@ -3,6 +3,7 @@ using P9_Blog_Generator_AI_Backend.Data;
 using P9_Blog_Generator_AI_Backend.DTOs.Blog;
 using P9_Blog_Generator_AI_Backend.Models;
 using P9_Blog_Generator_AI_Backend.Services.Interfaces;
+//using Serilog;
 
 
 namespace P9_Blog_Generator_AI_Backend.Services.Implementations;
@@ -20,6 +21,9 @@ public class BlogService : IBlogService
      int userId,
      GenerateBlogDto dto)
     {
+    //    Log.Information(
+    //"Blog generation started. UserId: {UserId}, Topic: {Topic}",
+    //userId, dto.Topic);
         var blogRequest = new BlogRequest
         {
             UserId = userId,
@@ -32,6 +36,10 @@ public class BlogService : IBlogService
 
         _context.BlogRequests.Add(blogRequest);
         await _context.SaveChangesAsync();
+
+    //    Log.Information(
+    //"AI content generated successfully for Topic: {Topic}",
+    //dto.Topic);
 
         var aiResult = await _aiService.GenerateBlogAsync(
             dto.Category,
@@ -50,6 +58,10 @@ public class BlogService : IBlogService
         _context.GeneratedBlogs.Add(generatedBlog);
         await _context.SaveChangesAsync();
 
+    //    Log.Information(
+    //"Blog saved successfully. BlogId: {BlogId}, UserId: {UserId}",
+    //generatedBlog.GeneratedBlogId, userId);
+
         return new BlogResponseDto
         {
             GeneratedBlogId = generatedBlog.GeneratedBlogId,
@@ -62,7 +74,11 @@ public class BlogService : IBlogService
     public async Task<List<BlogListDto>> GetMyBlogsAsync(
     int userId)
     {
-        return await _context.GeneratedBlogs
+    //    Log.Information(
+    //"Fetching blogs for UserId: {UserId}",
+    //userId);
+
+        var blogs= await _context.GeneratedBlogs
             .Where(g => g.BlogRequest!.UserId == userId)
             .Select(g => new BlogListDto
             {
@@ -86,10 +102,19 @@ public class BlogService : IBlogService
                 GeneratedAt = g.GeneratedAt
             })
         .ToListAsync();
+
+    //    Log.Information(
+    //"Retrieved {Count} blogs for UserId: {UserId}",
+    //blogs.Count, userId);
+        return blogs;
+
     }
     public async Task<BlogResponseDto?> GetBlogByIdAsync(
     int blogId)
     {
+    //    Log.Information(
+    //"Fetching blog details. BlogId: {BlogId}",
+    //blogId);
         return await _context.GeneratedBlogs
             .Where(g => g.GeneratedBlogId == blogId)
             .Select(g => new BlogResponseDto
@@ -105,22 +130,39 @@ public class BlogService : IBlogService
     public async Task<bool> DeleteBlogAsync(
     int blogId)
     {
+    //    Log.Information(
+    //"Delete blog request received. BlogId: {BlogId}",
+    //blogId);
+
         var blog = await _context.GeneratedBlogs
             .FirstOrDefaultAsync(g =>
                 g.GeneratedBlogId == blogId);
 
         if (blog == null)
+        {
+   //         Log.Warning(
+   //"Delete failed. Blog not found. BlogId: {BlogId}",
+   //blogId);
             return false;
+        }
 
         _context.GeneratedBlogs.Remove(blog);
 
         await _context.SaveChangesAsync();
+
+    //    Log.Information(
+    //"Blog deleted successfully. BlogId: {BlogId}",
+    //blogId);
 
         return true;
     }
     public async Task<BlogResponseDto> RegenerateBlogAsync(
     int blogRequestId)
     {
+    //    Log.Information(
+    //"Blog regeneration started. BlogRequestId: {BlogRequestId}",
+    //blogRequestId);
+
         var request = await _context.BlogRequests
             .FirstOrDefaultAsync(br =>
                 br.BlogRequestId == blogRequestId);
@@ -141,10 +183,18 @@ public class BlogService : IBlogService
             Title = aiResult.Title,
             Content = aiResult.Content
         };
+ //       Log.Information(
+ //"AI regenerated content successfully. BlogRequestId: {BlogRequestId}",
+ //blogRequestId);
+
 
         _context.GeneratedBlogs.Add(generatedBlog);
 
         await _context.SaveChangesAsync();
+
+        //Log.Information(
+        //    "Regenerated blog saved. New BlogId: {BlogId}",
+        //    generatedBlog.GeneratedBlogId);
 
         return new BlogResponseDto
         {
