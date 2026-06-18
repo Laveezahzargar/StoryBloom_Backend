@@ -52,6 +52,7 @@ public class BlogService : IBlogService
         return new BlogResponseDto
         {
             GeneratedBlogId = generatedBlog.GeneratedBlogId,
+            BlogRequestId = generatedBlog.BlogRequestId,
             Title = generatedBlog.Title,
             Content = generatedBlog.Content,
             GeneratedAt = generatedBlog.GeneratedAt
@@ -65,10 +66,25 @@ public class BlogService : IBlogService
             .Select(g => new BlogListDto
             {
                 GeneratedBlogId = g.GeneratedBlogId,
+
+                BlogRequestId = g.BlogRequestId,
+
                 Title = g.Title,
+
+                ContentPreview =
+                g.Content.Length > 100
+                    ? g.Content.Substring(0, 100) + "..."
+                    : g.Content,
+
+                Category = g.BlogRequest.Category,
+
+                Audience = g.BlogRequest.Audience,
+
+                Tone = g.BlogRequest.Tone,
+
                 GeneratedAt = g.GeneratedAt
             })
-            .ToListAsync();
+        .ToListAsync();
     }
     public async Task<BlogResponseDto?> GetBlogByIdAsync(
     int blogId)
@@ -78,6 +94,7 @@ public class BlogService : IBlogService
             .Select(g => new BlogResponseDto
             {
                 GeneratedBlogId = g.GeneratedBlogId,
+                BlogRequestId = g.BlogRequestId,
                 Title = g.Title,
                 Content = g.Content,
                 GeneratedAt = g.GeneratedAt
@@ -131,6 +148,7 @@ public class BlogService : IBlogService
         return new BlogResponseDto
         {
             GeneratedBlogId = generatedBlog.GeneratedBlogId,
+            BlogRequestId = generatedBlog.BlogRequestId,
             Title = generatedBlog.Title,
             Content = generatedBlog.Content,
             GeneratedAt = generatedBlog.GeneratedAt
