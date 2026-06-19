@@ -12,3 +12,4 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "P9_Blog_Generator_AI_Backend.dll"]
+
