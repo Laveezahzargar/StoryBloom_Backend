@@ -89,6 +89,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.MapGet("/", () => "StoryBloom API is running 🌸");
 app.UseCors("AllowReact");
 
 //app.UseSerilogRequestLogging();
