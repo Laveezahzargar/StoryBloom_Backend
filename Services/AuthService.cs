@@ -28,6 +28,7 @@ public class AuthService : IAuthService
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
+
         if (existingUser != null)
         {
     //        Log.Warning("Registration failed. Email already exists: {Email}",
