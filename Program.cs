@@ -47,7 +47,7 @@ builder.Services.AddCors(options =>
                   .AllowCredentials()
                   .WithOrigins(
                 "http://localhost:5175",
-                "https://story-bloom-nine.vercel.app"
+                "https://story-bloom-green.vercel.app/"
                 );
         });
 });
