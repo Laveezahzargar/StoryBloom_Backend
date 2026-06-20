@@ -47,7 +47,7 @@ builder.Services.AddCors(options =>
                   .AllowCredentials()
                   .WithOrigins(
                 "http://localhost:5175",
-                "https://story-bloom-green.vercel.app/"
+                "https://story-bloom-green.vercel.app"
                 );
         });
 });
@@ -94,13 +94,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/", () => "StoryBloom API is running 🌸");
-app.UseCors("AllowReact");
+
 
 //app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
 //app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors("AllowReact");
 
 app.UseAuthentication();
 
