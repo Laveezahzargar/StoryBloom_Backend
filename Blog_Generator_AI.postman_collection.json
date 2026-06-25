@@ -1,0 +1,267 @@
+{
+  "info": {
+    "_postman_id": "f2d7a324-7584-465c-bc78-ca7c536bd9dd",
+    "name": "Blog_Generator_AI",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55864067",
+    "_collection_link": "https://go.postman.co/collection/55864067-f2d7a324-7584-465c-bc78-ca7c536bd9dd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "P9_Blog_Generator_AI",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"laveezah.renosoftwares@outlook.com\",\r\n    \"password\":\"12345678\"\r\n\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"laveezah\",\r\n    \"email\":\"laveezah.renosoftwares@outlook.com\",\r\n    \"password\":\"12345678\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Blog",
+          "item": [
+            {
+              "name": "Get My Blog by Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibGF2ZWV6YWgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiZXhwIjoxNzgxNjgyNTQzLCJpc3MiOiJCbG9nR2VuZXJhdG9yQVBJIiwiYXVkIjoiQmxvZ0dlbmVyYXRvclVzZXJzIn0.A7A1OYY94bZGqvntvqc9FOCzg3JprkjfS9mbDwkhTAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\":\"Information\",\r\n    \"topic\":\"AI-Bubble\",\r\n    \"audience\":\"students\",\r\n    \"tone\":\"casual\",\r\n    \"wordcount\":\"100\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/blog/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "blog",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Generate Blog",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibGF2ZWV6YWgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiZXhwIjoxNzgxNjgyNTQzLCJpc3MiOiJCbG9nR2VuZXJhdG9yQVBJIiwiYXVkIjoiQmxvZ0dlbmVyYXRvclVzZXJzIn0.A7A1OYY94bZGqvntvqc9FOCzg3JprkjfS9mbDwkhTAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\":\"Information\",\r\n    \"topic\":\"AI-Bubble\",\r\n    \"audience\":\"students\",\r\n    \"tone\":\"casual\",\r\n    \"wordcount\":\"100\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/blog/generate",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "blog",
+                    "generate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Re-Generate Blog",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibGF2ZWV6YWgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiZXhwIjoxNzgxNjgyNTQzLCJpc3MiOiJCbG9nR2VuZXJhdG9yQVBJIiwiYXVkIjoiQmxvZ0dlbmVyYXRvclVzZXJzIn0.A7A1OYY94bZGqvntvqc9FOCzg3JprkjfS9mbDwkhTAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\":\"Information\",\r\n    \"topic\":\"AI-Bubble\",\r\n    \"audience\":\"students\",\r\n    \"tone\":\"casual\",\r\n    \"wordcount\":\"100\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/blog/generate",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "blog",
+                    "generate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get My Blogs",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibGF2ZWV6YWgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiZXhwIjoxNzgxNjgyNTQzLCJpc3MiOiJCbG9nR2VuZXJhdG9yQVBJIiwiYXVkIjoiQmxvZ0dlbmVyYXRvclVzZXJzIn0.A7A1OYY94bZGqvntvqc9FOCzg3JprkjfS9mbDwkhTAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\":\"Information\",\r\n    \"topic\":\"AI-Bubble\",\r\n    \"audience\":\"students\",\r\n    \"tone\":\"casual\",\r\n    \"wordcount\":\"100\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/blogs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "blogs"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete My Blog by Id",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibGF2ZWV6YWgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJsYXZlZXphaC5yZW5vc29mdHdhcmVzQG91dGxvb2suY29tIiwiZXhwIjoxNzgxNjgyNTQzLCJpc3MiOiJCbG9nR2VuZXJhdG9yQVBJIiwiYXVkIjoiQmxvZ0dlbmVyYXRvclVzZXJzIn0.A7A1OYY94bZGqvntvqc9FOCzg3JprkjfS9mbDwkhTAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\":\"Information\",\r\n    \"topic\":\"AI-Bubble\",\r\n    \"audience\":\"students\",\r\n    \"tone\":\"casual\",\r\n    \"wordcount\":\"100\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5238/api/blog/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5238",
+                  "path": [
+                    "api",
+                    "blog",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
